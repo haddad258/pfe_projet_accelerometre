@@ -29,4 +29,19 @@ exports.findAll = function(req, res) {
         res.json(Car);
     });
 };
+
+exports.create = function(req, res) {
+  const new_Car = new mesure(req.body);
+
+ console.log(req.body)
+ if(req.body === Object && Object.keys(req.body).length === 0){
+      res.status(400).send({ error:true, message: 'Please provide all required field' });
+  }else{
+    mesure.create(new_Car, function(err, Car) {
+          if (err)
+          res.send(err );
+          res.json({error:false,message:"mesure added successfully!",data:Car});
+      });
+  }
+};
   

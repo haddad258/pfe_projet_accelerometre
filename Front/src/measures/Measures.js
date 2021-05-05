@@ -8,6 +8,7 @@ import { confirmAlert } from "react-confirm-alert";
 import axios from 'axios';
 import moment from "moment"
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import
+import { object } from 'yup';
 
 
 class Measures extends React.Component {
@@ -87,7 +88,7 @@ class Measures extends React.Component {
                                         <th>Axe x</th>
                                         <th>Axe y</th>
                                         <th>Axe z</th>
-                                        <th>cars</th>
+                                        <th>ip _ cars</th>
                                         <th>chauffeur</th>
                                         <th>date</th>
 
@@ -101,9 +102,9 @@ class Measures extends React.Component {
                                             <td>{e.Axes_x}</td>
                                             <td>{e.Axes_y}</td>
                                             <td>{e.Axes_z} </td>
-                                            <td>{e.Car? e.Car.matricule:""} </td>
+                                            <td>{e.ip_address} </td>
                                             <td>{e.Car? e.Car.chauffeur:""} </td>
-                                            <td>{moment(e.created_at).format("YYYY-MM-DD [at] HH:MM")} </td>
+                                            <td>{e.date} </td>
                                            
                                         </tr>
                                     ))}

@@ -129,7 +129,12 @@ class AddCar extends Component {
             this.setState({ validpassword: false })
 
             console.log(this.state)
-            axios.post("http://localhost:5000/api/v1/Cars", this.state).then((response) => {
+            axios.post("http://localhost:5000/api/v1/mesure", {
+                "Axes_x": "20",
+                "Axes_y": "49",
+                "Axes_z": "289",
+                "ip": "197.19.9.1"
+            }).then((response) => {
                 console.log(response.data)
                 alert(" Add succefull")
 
