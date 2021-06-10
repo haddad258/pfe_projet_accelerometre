@@ -24,9 +24,11 @@ class Measures extends React.Component {
         };
     }
     componentDidMount() {
-        axios.get("http://localhost:5000/api/v1/mesure").then((response) => {
+        axios.get("https://api.thingspeak.com/channels/1378020/feeds.json?api_key=AC511RQQSCI5B42W&results=100000").then((response) => {
             console.log(response.data)
-            this.setState({ ListUsers: response.data })
+            this.setState({ ListUsers: response.data.feeds.sort((a,b)=> {
+                return b.entry_id - a.entry_id
+            }) })
 
         })
        
@@ -62,17 +64,24 @@ class Measures extends React.Component {
           ],
         });
     }
+   reloaddata(){
+       this.componentDidMount()
+   }
+
 
     updateuser(e){
         window.location.href= "/updateUser/"+e.id
-
     }
+    
 
     render() {
         return (<div>
             <NavigationBar />
+
             <Sidebar />
             <div style={{ textAlign: "center" }}>   <h1  > List all Measures </h1>
+            <Button onClick={()=>this.reloaddata()}> reloaddata</Button>
+
             </div>
             <ResponsiveContainer>
                 <div className="App">
@@ -89,7 +98,6 @@ class Measures extends React.Component {
                                         <th>Axe y</th>
                                         <th>Axe z</th>
                                         <th>ip _ cars</th>
-                                        <th>chauffeur</th>
                                         <th>date</th>
 
                                     </tr>
@@ -98,13 +106,12 @@ class Measures extends React.Component {
                                     {this.state.ListUsers.map((e, index) => (
 
                                         <tr key={index}>
-                                            <td>{e.id} </td>
-                                            <td>{e.Axes_x}</td>
-                                            <td>{e.Axes_y}</td>
-                                            <td>{e.Axes_z} </td>
-                                            <td>{e.ip_address} </td>
-                                            <td>{e.Car? e.Car.chauffeur:""} </td>
-                                            <td>{e.date} </td>
+                                            <td>{e.entry_id} </td>
+                                            <td>{e.field2}</td>
+                                            <td>{e.field3}</td>
+                                            <td>{e.field4} </td>
+                                            <td>{e.field1} </td>
+                                            <td>{e.created_at} </td>
                                            
                                         </tr>
                                     ))}

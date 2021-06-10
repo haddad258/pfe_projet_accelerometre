@@ -21,7 +21,7 @@ class AddCar extends Component {
 
 
 
-        };
+        };matricule
     }
 
 
@@ -129,11 +129,11 @@ class AddCar extends Component {
             this.setState({ validpassword: false })
 
             console.log(this.state)
-            axios.post("http://localhost:5000/api/v1/mesure", {
-                "Axes_x": "20",
-                "Axes_y": "49",
-                "Axes_z": "289",
-                "ip": "197.19.9.1"
+            axios.post("http://localhost:5000/api/v1/Cars", {
+                "matricule":  this.state.matricule,
+                "chauffeur": this.state.chauffeur,
+                "capacity": this.state.capacity,
+                "carte_ip": this.state.carte_ip
             }).then((response) => {
                 console.log(response.data)
                 alert(" Add succefull")
